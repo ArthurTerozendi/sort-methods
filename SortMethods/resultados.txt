@@ -1,0 +1,4 @@
+Quick 1000000 OrdA 
+Comparacoes: 2000000
+Movimentacoes: 482336
+Tempo: 3.6336638927459717s

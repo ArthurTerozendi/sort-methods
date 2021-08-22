@@ -1,8 +1,11 @@
 import time
 import random
-
+from HeapSort import heap_sort
+from QuickSort import quick_sort
+from ShellSort import shell_sort
 
 def insertion_sort( lista ):
+    inicio = time.time()
     comps = 0
     movs = 0
     for i in range( 1, len( lista ) ):
@@ -16,10 +19,10 @@ def insertion_sort( lista ):
             k -= 1
         lista[k] = chave
         movs+=1
-    return comps, movs
+    return comps, movs, time.time() - inicio
 
 def selection_sort(array):
-
+    inicio = time.time()
     movs = 0
     comps = 0
 
@@ -34,10 +37,10 @@ def selection_sort(array):
                 min_index = direita
         array[index], array[min_index] = array[min_index], array[index]
         movs+=1
-    return comps, movs
+    return comps, movs, time.time() - inicio
 
 def bubble_sort(lista):
-
+    inicio = time.time()
     movs = 0
     comps = 0
 
@@ -55,34 +58,27 @@ def bubble_sort(lista):
 
                 ordenado = False
 
-    return comps, movs
+    return comps, movs, time.time() - inicio
 
-def run_insertion_sort(array):
-    data = []
-    inicio = time.time()
-    data.append(insertion_sort(array))
-    fim = time.time()
-    tempo = fim - inicio
-    data.append(tempo)
-    return data
+def write_results(results):
+    arquivo = open('resultados.txt', 'a')
+    arquivo.truncate(0)
+    arquivo.write(metodo)
+    arquivo.write(" ")
+    arquivo.write(tamanho)
+    arquivo.write(" ")
+    arquivo.write(tipo)
+    arquivo.write(" ")
+    arquivo.write("\n")
+    arquivo.write("Comparacoes: " + str(results[0]))
+    arquivo.write("\n")
+    arquivo.write("Movimentacoes: " + str(results[1]))
+    arquivo.write("\n")
+    arquivo.write("Tempo: " + str(results[2]) + "s")
+    arquivo.close()
 
-def run_selection_sort(array):
-    data = []
-    inicio = time.time()
-    data.append(selection_sort(array))
-    fim = time.time()
-    tempo = fim - inicio
-    data.append(tempo)
-    return data
-
-def run_bubble_sort(array):
-    data = []
-    inicio = time.time()
-    data.append(bubble_sort(array))
-    fim = time.time()
-    tempo = fim - inicio
-    data.append(tempo)
-    return data
+def rand_quant():
+    return 0.1
 
 arquivo = open("entrada.txt","r")
 
@@ -95,203 +91,24 @@ tamanho = infos_formated[1]
 tipo = infos_formated[2]
 arquivo.close()
 
-def write_results_bubble():
-    arquivo = open('resultados.txt', 'a')
-    arquivo.truncate(0)
-    arquivo.write(metodo)
-    arquivo.write(" ")
-    arquivo.write(tamanho)
-    arquivo.write(" ")
-    arquivo.write(tipo)
-    arquivo.write(" ")
-    arquivo.write("\n")
-    arquivo.write("Comparacoes  Movimentacoes  Tempo")
-    arquivo.write("\n")
-    arquivo.write(str(run_bubble_sort(array)))
-    arquivo.close()
+array = list(range(0,int(tamanho)))
 
-def write_results_selection():
-    arquivo = open('resultados.txt', 'a')
-    arquivo.truncate(0)
-    arquivo.write(metodo)
-    arquivo.write(" ")
-    arquivo.write(tamanho)
-    arquivo.write(" ")
-    arquivo.write(tipo)
-    arquivo.write(" ")
-    arquivo.write("\n")
-    arquivo.write("Comparacoes  Movimentacoes  Tempo")
-    arquivo.write("\n")
-    arquivo.write(str(run_selection_sort(array)))
-    arquivo.close()
+if(tipo == 'OrdD'):
+    array.reverse()
+elif(tipo == 'OrdA'):
+    random.shuffle(array)
+elif(tipo == 'OrdP'):
+    random.shuffle(array,rand_quant)
 
-def write_results_insertion():
-    arquivo = open('resultados.txt', 'a')
-    arquivo.truncate(0)
-    arquivo.write(metodo)
-    arquivo.write(" ")
-    arquivo.write(tamanho)
-    arquivo.write(" ")
-    arquivo.write(tipo)
-    arquivo.write(" ")
-    arquivo.write("\n")
-    arquivo.write("Comparacoes  Movimentacoes  Tempo")
-    arquivo.write("\n")
-    arquivo.write(str(run_insertion_sort(array)))
-    arquivo.close()
-
-def rand_quant():
-    return 0.1
-
-
-if(tamanho == '100'):
-    array = list(range(0,100))
-
-    if(tipo == 'OrdC'):
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdD'):
-        array.reverse()
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdA'):
-        random.shuffle(array)
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdP'):
-        random.shuffle(array,rand_quant)
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-elif(tamanho == '1000'):
-    array = list(range(0,1000))
-
-    if(tipo == 'OrdC'):
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdD'):
-        array.reverse()
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdA'):
-        random.shuffle(array)
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdP'):
-        random.shuffle(array,rand_quant)
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-elif(tamanho == '100000'):
-    array = list(range(0,100000))
-
-    if(tipo == 'OrdC'):
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdD'):
-        array.reverse()
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdA'):
-        random.shuffle(array)
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdP'):
-        random.shuffle(array,rand_quant)
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-elif(tamanho == '1000000'):
-    array = list(range(0,1000000))
-
-    if(tipo == 'OrdC'):
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdD'):
-        array.reverse()
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdA'):
-        random.shuffle(array)
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
-
-    elif(tipo == 'OrdP'):
-        random.shuffle(array,rand_quant)
-        if(metodo == 'Bubble'):
-            write_results_bubble()
-        elif(metodo == 'Select'):
-            write_results_selection()
-        elif(metodo == 'Insert'):
-            write_results_insertion()
+if(metodo == 'Bubble'):
+    write_results(bubble_sort(array))
+elif(metodo == 'Select'):
+    write_results(selection_sort(array))
+elif(metodo == 'Insert'):
+    write_results(insertion_sort(array))
+elif(metodo == 'Shell'):
+    write_results(shell_sort(array))
+elif(metodo == 'Quick'):
+    write_results(quick_sort(array, 0, len(array) - 1, 0, 0))
+elif(metodo == 'Heap'):
+    write_results(heap_sort(array))
