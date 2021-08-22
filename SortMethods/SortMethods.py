@@ -46,9 +46,9 @@ def bubble_sort(lista):
 
     elementos = len(lista)-1
 
-    for j in range(elementos-1):
+    for j in range(elementos):
         comps+=1
-        for i in range(elementos-2):
+        for i in range(elementos-1):
             movs+=1
             if lista[i] > lista[i+1]:
                 movs+=1
