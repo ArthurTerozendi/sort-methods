@@ -45,19 +45,15 @@ def bubble_sort(lista):
     comps = 0
 
     elementos = len(lista)-1
-    ordenado = False
-    while not ordenado:
-        ordenado = True
+
+    for j in range(elementos-1):
         comps+=1
-        for i in range(elementos):
+        for i in range(elementos-2):
             movs+=1
             if lista[i] > lista[i+1]:
                 movs+=1
                 comps+=1
                 lista[i], lista[i+1] = lista[i+1],lista[i]
-
-                ordenado = False
-
     return comps, movs, time.time() - inicio
 
 def write_results(results):

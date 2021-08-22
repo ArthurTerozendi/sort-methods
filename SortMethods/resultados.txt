@@ -1,4 +1,4 @@
-Quick 1000000 OrdA 
-Comparacoes: 2000000
-Movimentacoes: 482336
-Tempo: 3.6336638927459717s
+Bubble 100 OrdD 
+Comparacoes: 4851
+Movimentacoes: 14259
+Tempo: 0.0009996891021728516s
