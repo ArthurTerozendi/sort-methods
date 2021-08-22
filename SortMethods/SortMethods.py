@@ -1,60 +1,11 @@
 import time
 import random
+from BubbleSort import bubble_sort
+from InsertionSort import insertion_sort
+from SelectionSort import selection_sort
 from HeapSort import heap_sort
 from QuickSort import quick_sort
 from ShellSort import shell_sort
-
-def insertion_sort( lista ):
-    inicio = time.time()
-    comps = 0
-    movs = 0
-    for i in range( 1, len( lista ) ):
-        chave = lista[i]
-        k = i
-        comps+=1
-        movs+=1
-        while k > 0 and chave < lista[k - 1]:
-            lista[k] = lista[k - 1]
-            movs+=1
-            k -= 1
-        lista[k] = chave
-        movs+=1
-    return comps, movs, time.time() - inicio
-
-def selection_sort(array):
-    inicio = time.time()
-    movs = 0
-    comps = 0
-
-    for index in range(1, len(array)):
-        min_index = index
-        movs+=1
-        comps+=1
-        movs+=1
-        for direita in range(index + 1, len(array)):
-            comps+=1
-            if array[direita] < array[min_index]:
-                min_index = direita
-        array[index], array[min_index] = array[min_index], array[index]
-        movs+=1
-    return comps, movs, time.time() - inicio
-
-def bubble_sort(lista):
-    inicio = time.time()
-    movs = 0
-    comps = 0
-
-    elementos = len(lista)-1
-
-    for j in range(elementos):
-        comps+=1
-        for i in range(elementos-1):
-            movs+=1
-            if lista[i] > lista[i+1]:
-                movs+=1
-                comps+=1
-                lista[i], lista[i+1] = lista[i+1],lista[i]
-    return comps, movs, time.time() - inicio
 
 def write_results(results):
     arquivo = open('resultados.txt', 'a')
