@@ -13,7 +13,7 @@ def heap_sort(array):
         array[i], array[0] = array[0], array[i]
         mov, count = create_heap(array, 0, i, mov, count)
     
-    return array, time.time() - init, mov, count
+    return count, mov, time.time() - init
 
 def create_heap(array, init, final, mov, count):
     largest = init
@@ -37,10 +37,3 @@ def create_heap(array, init, final, mov, count):
         create_heap(array, largest, final, mov, count)
     
     return mov, count;
-
-
-array = list(range(0,100))
-# random.shuffle(array) 
-# print(array)
-# print()
-print(heap_sort(array))

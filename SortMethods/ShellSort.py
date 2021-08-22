@@ -24,10 +24,4 @@ def shell_sort(array):
                 array[j] = currValue
         gap = gap // 2
 
-    return array, time.time() - start, mov, count
-
-array = list(range(0,1000000))
-random.shuffle(array) 
-print(array)
-print()
-print(shell_sort(array))
+    return count, mov, time.time() - start

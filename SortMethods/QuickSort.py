@@ -11,8 +11,7 @@ def quick_sort(array, first, last, mov, count):
         quick_sort(array, first, splitpoint - 1, mov, count)
         quick_sort(array, splitpoint + 1, last, mov, count)
 
-    final = time.time();
-    return array, final - init, mov, count
+    return count, mov, time.time() - init
 
 
 def partition(array, first, last, mov, count):
@@ -46,12 +45,3 @@ def partition(array, first, last, mov, count):
 
 
     return last, mov, count
-
-count = 0
-mov = 0
-
-array = list(range(0,1000000))
-random.shuffle(array) 
-print(array)
-print()
-print(quick_sort(array, 0, len(array) - 1, mov, count))
