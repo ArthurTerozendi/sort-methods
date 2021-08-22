@@ -70,11 +70,16 @@ def write_results(results):
     arquivo.write("\n")
     arquivo.write("Movimentacoes: " + str(results[1]))
     arquivo.write("\n")
-    arquivo.write("Tempo: " + str(results[2]) + "s")
+    arquivo.write("Tempo: " + str(results[2]))
     arquivo.close()
 
-def rand_quant():
-    return 0.1
+def rand_quant(tam):
+    t = int(tam * 0.1);
+    arr = (list(range(0,int(tam - t))))
+    rArr = (list(range(0, int(tam * 0.1))))
+    random.shuffle(rArr);
+    arr.extend(rArr);
+    return arr;
 
 arquivo = open("entrada.txt","r")
 
@@ -94,7 +99,7 @@ if(tipo == 'OrdD'):
 elif(tipo == 'OrdA'):
     random.shuffle(array)
 elif(tipo == 'OrdP'):
-    random.shuffle(array,rand_quant)
+    array = rand_quant(int(tamanho))
 
 if(metodo == 'Bubble'):
     write_results(bubble_sort(array))
